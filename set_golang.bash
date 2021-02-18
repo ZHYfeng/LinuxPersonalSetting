@@ -8,8 +8,8 @@ if [ -d "$GOROOT" ]; then
     echo "$GOROOT exist"
 else
     cd $GIT
-    wget https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz
-    tar -xf ./go1.13.5.linux-amd64.tar.gz
+    wget https://dl.google.com/go/go1.16.linux-amd64.tar.gz
+    tar -xf ./go1.16.linux-amd64.tar.gz
     mv go goroot
     mkdir gopath
     echo "export GOROOT=$GOROOT" >> $BASHRC

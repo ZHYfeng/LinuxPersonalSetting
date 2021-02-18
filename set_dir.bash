@@ -1,7 +1,5 @@
 #!/bin/bash
 
-git config --global user.name Yu Hao
-git config --global user.email yhao016@ucr.edu
 
 DATA=$HOME/data
 if [ -d "$DATA" ]; then
@@ -16,6 +14,9 @@ if [ -d "$GIT" ]; then
 else 
     mkdir $GIT
 fi
+
+git config --global user.name Yu Hao
+git config --global user.email yhao016@ucr.edu
 
 BUILD=$DATA/build
 if [ -d "$BUILD" ]; then
