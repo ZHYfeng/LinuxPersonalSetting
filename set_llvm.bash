@@ -2,19 +2,15 @@
 
 BUILD=$HOME/data/build
 GIT=$HOME/data/git
-LLVM=$GIT/llvm-7.0.0.src
+LLVM=$GIT/llvm-project
 if [ -d "$LLVM" ]; then
     echo "$LLVM exist"
 else
     cd $GIT
-    wget http://releases.llvm.org/7.0.0/llvm-7.0.0.src.tar.xz
-    tar -xf llvm-7.0.0.src.tar.xz
-    wget http://releases.llvm.org/7.0.0/cfe-7.0.0.src.tar.xz
-    tar -xf cfe-7.0.0.src.tar.xz
-    mv cfe-7.0.0.src $LLVM/tools/clang
+    git clone https://github.com/llvm/llvm-project.git
     mkdir $LLVM/build
     cd $LLVM/build
-    cmake -G "Unix Makefiles" -DLLVM_ENABLE_RTTI=ON -DCMAKE_INSTALL_PREFIX:PATH=$BUILD ..
-    make
+    cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS=clang -DCMAKE_INSTALL_PREFIX=/home/yhao/data/build -DLLVM_TARGETS_TO_BUILD="X86;AArch64" ../llvm
+    make -j10
     make install
 fi
