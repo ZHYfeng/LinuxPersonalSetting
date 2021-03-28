@@ -8,7 +8,7 @@ if [ "$EUID" == 0 ]; then
     sudo apt install -y python3-distutils
     sudo apt install -y python3-pip
     sudo apt install -y autoconf automake libtool curl make g++ unzip
-    sudo apt install -y build-essential autoconf libtool pkg-config libgflags-dev libgtest-dev libc++-dev
+    sudo apt install -y build-essential autoconf libtool pkg-config libgflags-dev libgtest-dev libc++-dev flex bison libssl-dev libelf-dev
 else
     echo "run as user"
 fi
