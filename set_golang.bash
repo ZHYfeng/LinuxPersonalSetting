@@ -2,18 +2,29 @@
 
 BASHRC=$HOME/.bashrc
 GIT=$HOME/data/git
-GOROOT=$GIT/goroot
-GOPATH=$GIT/gopath
-if [ -d "$GOROOT" ]; then
-    echo "$GOROOT exist"
+PATHGOROOT=$GIT/goroot
+PATHGOPATH=$GIT/gopath
+GO=go1.16.2.linux-amd64.tar.gz
+if [ -d "$PATHGOROOT" ]; then
+    echo "$PATHGOROOT exist"
 else
-    cd $GIT
-    wget https://dl.google.com/go/go1.16.linux-amd64.tar.gz
-    tar -xf ./go1.16.linux-amd64.tar.gz
+    cd $GIT || exit
+    wget https://dl.google.com/go/$GO
+    tar -xf ./$GO
     mv go goroot
-    mkdir gopath
-    echo "export GOROOT=$GOROOT" >> $BASHRC
-    echo "export GOPATH=$GOPATH" >> $BASHRC
+fi
+
+if [ -d "$PATHGOPATH" ]; then
+    echo "$PATHGOPATH exist"
+else 
+    mkdir $PATHGOPATH
+fi
+
+if [ -z "$GOROOT" ]; then
+    echo "GOPATH not exist"
+    echo "export GOROOT=$PATHGOROOT" >> $BASHRC
+    echo "export GOPATH=$PATHGOPATH" >> $BASHRC
     echo "export PATH=\$GOROOT/bin:\$GOPATH/bin:\$PATH" >> $BASHRC
+    # shellcheck disable=SC1090
     source $BASHRC
 fi

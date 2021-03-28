@@ -25,5 +25,5 @@ else
     BUILD=$DATA/build
     mkdir $BUILD
     echo "export PKG_CONFIG_PATH=$BUILD/lib/pkgconfig:\$PKG_CONFIG_PATH" >> $HOME/.bashrc
-    echo "PATH="$BUILD/bin:\$PATH >> $HOME/.bashrc
+    echo "export PATH="$BUILD/bin:\$PATH >> $HOME/.bashrc
 fi

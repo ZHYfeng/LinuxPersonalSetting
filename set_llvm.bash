@@ -1,16 +1,18 @@
 #!/bin/bash
 
-BUILD=$HOME/data/build
-GIT=$HOME/data/git
-LLVM=$GIT/llvm-project
+
+BASE=$HOME/data/git
+BUILD=$BASE/../build
+LLVM=$BASE/llvm-project
 if [ -d "$LLVM" ]; then
     echo "$LLVM exist"
 else
-    cd $GIT
+    cd $BASE || echo "$BASE not exit" && exit
     git clone https://github.com/llvm/llvm-project.git
-    mkdir $LLVM/build
-    cd $LLVM/build
-    cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang;lld" -DCMAKE_INSTALL_PREFIX=/home/yhao/data/build -DLLVM_TARGETS_TO_BUILD="X86;AArch64" ../llvm
+    cd $LLVM || echo "$LLVM not exit" && exit
+    git checkout tags/llvmorg-11.0.1
+    mkdir $LLVM/build && cd $LLVM/build || echo "$LLVM/build not exit" && exit
+    cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang;lld" -DCMAKE_INSTALL_PREFIX=$BUILD -DLLVM_TARGETS_TO_BUILD="X86;AArch64" ../llvm
     make -j10
     make install
 fi
