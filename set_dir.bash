@@ -15,7 +15,7 @@ else
     mkdir $GIT
 fi
 
-git config --global user.name Yu Hao
+git config --global user.name YuHao
 git config --global user.email yhao016@ucr.edu
 
 BUILD=$DATA/build
